@@ -1,0 +1,93 @@
+<div class="d-flex align-items-center flex-column detail">
+ <h1 class="text-white"><%= @post.user.name %> Photo detail</h1>
+</div>
+
+
+<section>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-6">
+                <div class="mt-3">
+                    <div class="d-flex  justify-content-center">
+                        <div  class="d-flex flex-column">
+                              <!--画像＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
+                              <div class="">
+                                <%=  link_to @post.image.url,width: "500",height: "auto" ,'data-lightbox': @post.image do %>
+                                  <%= image_tag(@post.image.url,width: "400",height: "auto") if @post.image? %>
+                                <% end %>
+                              </div>
+                              <!--タイトル＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
+                              <div class="text-white mt-2">
+                                <p>タイトル : <%= @post.title %></p>
+
+                              </div>
+                              <!--説明文＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
+                              <div class="text-white">
+                                <p class="">説明</p>
+                                <p class ="comment-item" wrap="normal"><%= @post.text %></p>
+                              </div>
+                        </div>
+                    </div>
+                        <!--編集&削除ボタン&お気に入ボタン＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝＝-->
+                    <div class="d-flex flex-row justify-content-around	">
+                          <% if current_user == @post.user %>
+                            <div class= mr-5>
+                              <%= link_to 'Edit', edit_post_path(@post) , class: 'btn btn-info' %>
+                            </div>
+                            <div>
+                              <%= link_to 'Destroy', @post, method: :delete, data: { confirm: '削除しますか?' },class: 'btn btn-danger' %>
+                            </div>
+                          <% end %>
+                          <div>
+                            <%= render 'likes/like_button',post: @post %>
+                          </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-6">
+                <div class="mt-3 text-white">
+                    <h2>コメント一覧</h2>
+                      <% @comments.each do |c| %>
+                        <li class="media mb-3">
+                            <div class="media-body">
+                              <div class="pic">
+                                <% if c.user.image? %>
+                                  <%= image_tag c.user.image.url,width: "100%",height: "auto" %>
+                                <% else %>
+                                  <%= image_tag "/images/camera1.jpg",width: "100%",height: "auto"  %>
+                                <% end %>
+                                <%# !-- 一時的にコメントアウト　cariawaveでherokuへプロフィール画像機能ができたら消す= image_tag c.user.profile_picture,width: "50",height: "50"%>  <%= c.user.name%>
+                              </div>
+                              <div class="pl-2">
+                                <%= c.content %>
+                              </div>
+                            </div>
+                          </li>
+                      <% end %>
+
+                      <%= form_for [@post, @comment] do |f| %>
+                        <%= f.text_area :content %>
+                        <br>
+                        <%= f.submit 'コメントする' %>
+                      <% end %>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<style>
+  .detail{
+    padding-top: 100px;
+    padding-bottom: 50px;
+    position: relative;
+  }
+
+  .pic img{
+    border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
+    width: 30px;  /* 縦横を同じ値にする */
+    height: 30px;  /* 縦横を同じ値にする */
+    object-fit: cover; /* 縦横比固定したまま上2つの縦横の範囲内に収まるように配置する */
+  }
+</style>

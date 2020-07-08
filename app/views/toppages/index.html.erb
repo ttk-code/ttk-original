@@ -1,0 +1,116 @@
+<!-- START HOME -->
+
+        <section class="section image-crossfader  h-100vh " >
+            <div class="image-crossfader-inner"></div>
+            <div class="image-crossfader-inner"></div>
+            <div class="image-crossfader-inner"></div>
+            <div class="image-crossfader-inner"></div>
+            <!--<div class="image-crossfader-inner"></div>
+            <div class="image-crossfader-inner"></div>
+            <div class="image-crossfader-inner"></div>-->
+            <div id="home"></div>
+            <div class="bg-overlay" ></div>
+            <div class="header-table">
+                <div class="header-table-center">
+                    <div class="container position-relative z-index">
+                        <div class="row justify-content-center">
+                            <div class="col-lg-12">
+                                <div class="text-center header-content mx-auto">
+                                    <h4 class="text-white first-title mb-4">Welcome</h4>
+                                    <h1 class="header-name text-white text-capitalize mb-0"><span class="simple-text-rotate font-weight-bold">フォトシェア</span></h1>
+                                    <p class="text-white mx-auto header-desc mt-4">特別な一枚を共有しよう</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+<!-- END HOME -->
+
+<!-- 無限スクロール↓ -->
+
+<!-- 無限スクロール ↑-->
+<section class="pic-table "　id="pictures">
+    <% if logged_in? %>
+      <div class="text-white d-flex flex-wrap justify-content-center ">
+        <% @posts.each do |post| %>
+          <div class="d-flex flex-column  m-2" >
+              <div class= "pic">
+                <%=  link_to post.image.url,width: "500",height: "auto" ,'data-lightbox': post.image do %>
+                 <%= image_tag(post.image.url,width: "200",height: "200") if post.image? %>
+                <% end %>
+              </div>
+
+             <div class="d-flex flex-row">
+               <p class="mr-3">
+                 <%= post.title %>
+               </p>
+               <p>
+                 <%= link_to 'Show', post %>
+               </p>
+             </div>
+          </div>
+        <% end %>
+      </div>
+
+
+      <!--div class="d-flex justify-content-center">
+      ページネーションするときはここに記述する
+      </div-->
+    <% else %>
+
+
+      <div class="text-white   d-flex flex-wrap justify-content-center	 ">
+        <% @posts.each do |post| %>
+            <div class="d-flex flex-column m-2" >
+              <%=  link_to post.image.url,width: "500",height: "200" ,'data-lightbox': post.image do %>
+                <%= image_tag(post.image.url,width: "200",height: "auto")  %>
+              <% end %>
+              <div class="d-flex flex-row">
+                <p class="mr-3">
+                  <%= post.title %>
+                </p>
+              </div>
+            </div>
+        <% end %>
+      </div>
+    <% end %>
+</section>
+<!-- 無限スクロール↓ -->
+
+<!-- 無限スクロール ↑-->
+
+<%#if post.image?%>
+
+<style>
+  .pic-table{
+  margin: 0 auto;
+  text-align: center;
+  width: 100%;
+  max-width: 2000px;
+}
+  .pic img{
+    object-fit: cover;
+  }
+
+.bg-overlay {
+    background-color: rgba(0, 0, 0, 0.50);
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+}
+
+#home{
+  z-index: 3;
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+}
+</style>

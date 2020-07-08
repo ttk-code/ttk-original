@@ -1,0 +1,14 @@
+<!-- ユーザー検索  -->
+<section class="section pl-2">
+  <p class="text-white media-body text-left">ユーザー検索</p>
+  <%= form_tag(users_path, :method => 'get' ) do %>
+    <p class=" media-body text-left ">
+    <%= text_field_tag :search %>
+    <%= submit_tag 'Search', :name => nil %>
+    </p>
+  <% end %>
+</section>
+
+<%= render 'users', users: @users %>
+
+

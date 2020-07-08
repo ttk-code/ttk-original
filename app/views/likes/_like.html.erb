@@ -1,0 +1,29 @@
+<ul class="list-unstyled">
+  <% likings.each do |micropost| %>
+    <li class="media mb-3">
+      <div class="user-pic"><%= image_tag micropost.user.profile_picture,width: "50",height: "50"%></div>
+      <div class="media-body">
+        <div class=" text-left pl-4">
+          <%= link_to micropost.user.name, user_path(micropost.user) %> <span class="text-muted">posted at <%= micropost.created_at %></span>
+        </div>
+         <div>
+           <%#<%= image_tag post.image.url if post.image? %>
+          <p class=" text-left pl-5"><%= image_tag(micropost.image.url,width: "150",height: "auto") if micropost.image? %></p>
+          <p class=" text-left pl-5"><%= micropost.title %></p>
+
+        </div>
+
+      </div>
+    </li>
+  <% end %>
+  <%= paginate likings %>
+</ul>
+
+<style>
+.user-pic img {
+  border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
+  width: 50px;  /* 縦横を同じ値にする */
+  height: 50px;  /* 縦横を同じ値にする */
+  object-fit: cover; /* 縦横比固定したまま上2つの縦横の範囲内に収まるように配置する */
+}
+</style>

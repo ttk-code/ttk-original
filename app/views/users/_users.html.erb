@@ -1,0 +1,38 @@
+<!-- 　ユーザー一覧　-->
+<% if users.any? %>
+  <ul class="list-unstyled pl-4">
+    <% users.each do |user| %>
+      <li class="media">
+        <!-- ここにプロフィール画像のimage_tagを入れる --->
+        <%# if user.profile_picture.attached?  %>
+          <div><%#= image_tag user.profile_picture,width: "100%",height: "auto"%></div>
+        <%# end  %>
+
+    				<% if user.image? %>
+              <div><%= image_tag user.image.url,width: "100%",height: "auto" %></div>
+            <% else %>
+              <div><%= image_tag "/images/camera1.jpg",width: "100%",height: "auto"  %></div>
+            <% end %>
+
+        <div class="media-body text-left pl-3">
+          <div class="text-white">
+            <%= user.name %>
+          </div>
+          <div>
+            <p><%= link_to 'View profile', user_path(user) %></p>
+          </div>
+        </div>
+      </li>
+    <% end %>
+  </ul>
+  <%= paginate users %>
+<% end %>
+
+<style>
+.media img {
+  border-radius: 50%;  /* 角丸半径を50%にする(=円形にする) */
+  width: 50px;  /* 縦横を同じ値にする */
+  height: 50px;  /* 縦横を同じ値にする */
+  object-fit: cover; /* 縦横比固定したまま上2つの縦横の範囲内に収まるように配置する */
+}
+</style>
