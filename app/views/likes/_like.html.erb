@@ -1,7 +1,13 @@
 <ul class="list-unstyled">
   <% likings.each do |micropost| %>
     <li class="media mb-3">
-      <div class="user-pic"><%= image_tag micropost.user.profile_picture,width: "50",height: "50"%></div>
+      <div class="user-pic">
+        <% if micropost.image? %>
+          <div><%= image_tag micropost.user.image.url,width: "100%",height: "auto" %></div>
+        <% else %>
+          <div><%= image_tag "/images/camera1.jpg",width: "100%",height: "auto"  %></div>
+        <% end %>
+      </div>
       <div class="media-body">
         <div class=" text-left pl-4">
           <%= link_to micropost.user.name, user_path(micropost.user) %> <span class="text-muted">posted at <%= micropost.created_at %></span>
