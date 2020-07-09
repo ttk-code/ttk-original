@@ -177,13 +177,16 @@ a:hover span:nth-of-type(4) {
     background-image: url("/images/t4.jpeg");
 }
 .image-crossfader-inner:nth-child(5) {
-    background-image: url("/images/t5.jpeg");
+    background-image: url("/images/tt5.jpeg");
 }
 .image-crossfader-inner:nth-child(6) {
     background-image: url("/images/t6.jpeg");
 }
 .image-crossfader-inner:nth-child(7) {
     background-image: url("/images/t7.jpeg");
+}
+.image-crossfader-inner:nth-child(8) {
+    background-image: url("/images/t8.jpeg");
 }
 /*====背景画像ループ処理　終
 =============================*/
