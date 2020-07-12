@@ -18,7 +18,7 @@
 //= require jquery
 //= require jquery_ujs
 
-//==========ヘッダー画像ループ処理
+//==========ヘッダー画像ループ処理======================================
 var elInner, duration, defaultIndex, switchImage;
 elInner = document.getElementsByClassName('image-crossfader-inner');
 duration = 5000;
@@ -32,9 +32,19 @@ switchImage = function(next) {
 };
 window.onload = switchImage.bind(this, defaultIndex);
 
+//==========ヘッダースクロールボタン処理======================================
+$(function(){
+  $('a[href^="#"]').click(function(){
+    var speed = 800;
+    var href= $(this).attr("href");
+    var target = $(href == "#" || href == "" ? 'html' : href);
+    var position = target.offset().top;
+    $("html, body").animate({scrollTop:position}, speed, "swing");
+    return false;
+  });
+});
 
-
-//==========ヘッダーアニメーション　始
+//==========ヘッダーアニメーション始======================================
 //<!--PARTICLES ANIMATE JS-->
 //
 /* -----------------------------------------------

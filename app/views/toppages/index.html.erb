@@ -26,6 +26,10 @@
             </div>
         </div>
     </div>
+    <div class="scroll_down row justify-content-center">
+        <div class="text-white"><h3>Gallery</h3></div>
+        <a href="#about" class="pr-3"><span></span></a>
+    </div>
 
 </section>
 
@@ -34,7 +38,8 @@
 <!-- 無限スクロール↓ -->
 
 <!-- 無限スクロール ↑-->
-<section class="pic-table "　id="pictures">
+<section class="pic-table section" id="about">
+  <div class="container">
     <% if logged_in? %>
       <div class="text-white d-flex flex-wrap justify-content-center ">
         <% @posts.each do |post| %>
@@ -79,7 +84,12 @@
         <% end %>
       </div>
     <% end %>
+  </div>
 </section>
+
+
+
+
 <!-- 無限スクロール↓ -->
 
 <!-- 無限スクロール ↑-->
@@ -114,6 +124,61 @@
   height: 100%;
 }
 
-/*下の投稿コンテンツにスクールするボタン*/
+/*===========================
+       スクロールボタン
+=============================*/
+.scroll_down {
+    position: absolute;
+    bottom: 5vh;
+    width: 100%;
+    text-align: center;
+    color: #fff;
+    font-size: 13px;
+    z-index: 8;
+}
 
+.scroll_down a {
+  position: absolute;
+  line-height: 54px;
+  top: 0;
+  left: 50%;
+  width: 30px;
+  height: 30px;
+  margin-left: -12px;
+  border-left: 4px solid #fff;
+  border-bottom: 4px solid #fff;
+  -webkit-transform: rotateZ(-45deg);
+  transform: rotateZ(-45deg);
+  -webkit-animation: sdb 1.3s infinite;
+  animation: sdb 1.3s infinite;
+  box-sizing: border-box;
+}
+@-webkit-keyframes sdb {
+  0% {
+    -webkit-transform: rotateY(0) rotateZ(-45deg) translate(0, 0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    -webkit-transform: rotateY(720deg) rotateZ(-45deg) translate(-20px, 20px);
+    opacity: 0;
+  }
+}
+@keyframes sdb {
+  0% {
+    transform: rotateY(0) rotateZ(-45deg) translate(0, 0);
+    opacity: 0;
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    transform: rotateY(720deg) rotateZ(-45deg) translate(-20px, 20px);
+    opacity: 0;
+  }
+}
 </style>
+
+
